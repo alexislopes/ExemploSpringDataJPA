@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.service;
+package br.gov.sp.fatec.service.api;
 
 import br.gov.sp.fatec.model.Consulta;
 import br.gov.sp.fatec.model.Medico;

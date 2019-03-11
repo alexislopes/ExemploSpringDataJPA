@@ -1,11 +1,10 @@
 package br.gov.sp.fatec.service;
 
-import br.gov.sp.fatec.model.Consulta;
 import br.gov.sp.fatec.model.Medico;
 import br.gov.sp.fatec.repository.ConsultaRepository;
 import br.gov.sp.fatec.repository.MedicoRepository;
+import br.gov.sp.fatec.service.api.MedicoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +12,7 @@ import java.util.List;
 
 
 @Service("medicoService")
-public class MedicoServiceImpl implements MedicoService{
+public class MedicoServiceImpl implements MedicoService {
 
     @Autowired
     private MedicoRepository medicoRepository;
@@ -74,6 +73,11 @@ public class MedicoServiceImpl implements MedicoService{
     @Transactional
     public List<Medico> achaMedicoPorEspecialidade(String especialidade) {
         return medicoRepository.findMedicoByEspecialidade(especialidade);
+    }
+
+    @Override
+    public void deletaTodosMedicos() {
+        medicoRepository.deleteAll();
     }
 
 }

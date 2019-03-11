@@ -1,7 +1,8 @@
 package br.gov.sp.fatec;
 
 import br.gov.sp.fatec.model.Medico;
-import br.gov.sp.fatec.service.MedicoService;
+import br.gov.sp.fatec.service.ConsultaServiceImpl;
+import br.gov.sp.fatec.service.api.MedicoService;
 
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class ExemploSpringDataJpaApplication implements CommandLineRunner {
 	@Autowired
 	private MedicoService medicoService;
 
+	@Autowired
+	private ConsultaServiceImpl consultaService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ExemploSpringDataJpaApplication.class, args);
 	}
@@ -26,7 +30,10 @@ public class ExemploSpringDataJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		medicoService.insereMedico(new Medico("Will", "Halstead", "Médico de Sala de Emergência"));
+		//medicoService.insereMedico(new Medico("Connor", "Rhodes", "Cirurgião Cardiotoráxico"));
+		//medicoService.insereMedico(new Medico("Will", "Halstead", "Médico de Sala de Emergência"));
+
+		//
 		Medico medico = medicoService.achaMedicoPorCrm(2L);
 		
 		System.out.println(medico.getNome());

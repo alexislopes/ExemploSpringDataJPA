@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-@Rollback
+@Rollback()
 public class MedicoRepositoryTest {
 
 
@@ -25,7 +26,7 @@ public class MedicoRepositoryTest {
 	private MedicoRepository medicoRepository;
 	
 
-	public void setUsuarioRepo(MedicoRepository medicoRepository) {
+	public void setMedicoRepository(MedicoRepository medicoRepository) {
 		this.medicoRepository = medicoRepository;
 	}
 
@@ -33,7 +34,7 @@ public class MedicoRepositoryTest {
 	public void insereMedicoTest() {
 		Medico medico = new Medico();
 		medico.setNome("Natalie");
-		medico.setSobrenome("MAnning");
+		medico.setSobrenome("Manning");
 		medico.setEspecialidade("Medico de Sala de Emergência");
 		medicoRepository.save(medico);
 		assertNotNull(medico.getCrm());
@@ -42,7 +43,7 @@ public class MedicoRepositoryTest {
 	@Test
 	public void achaMedicoPorCrm(){
 		Medico medico = medicoRepository.findMedicoByCrm(1L);
-		assertEquals("Connan", medico.getNome());
+		assertEquals("Connor", medico.getNome());
 	}
 
 }
