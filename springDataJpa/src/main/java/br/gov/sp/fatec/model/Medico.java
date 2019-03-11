@@ -7,6 +7,11 @@ import java.util.List;
 @Entity
 public class Medico implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long crm;
@@ -20,10 +25,7 @@ public class Medico implements Serializable {
     private String especialidade;
 
     
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "ConsultaMedico",
-    	joinColumns = { @JoinColumn(name = "crm") },
-    	inverseJoinColumns = { @JoinColumn(name = "id") })
+    @OneToMany(mappedBy="crm", fetch = FetchType.LAZY)
     private List<Consulta> consultas;
 
 	public Medico() {

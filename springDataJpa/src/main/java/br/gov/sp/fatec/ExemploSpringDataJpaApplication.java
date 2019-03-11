@@ -2,6 +2,9 @@ package br.gov.sp.fatec;
 
 import br.gov.sp.fatec.model.Medico;
 import br.gov.sp.fatec.service.MedicoService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,6 +26,15 @@ public class ExemploSpringDataJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		//medicoService.insereMedico(new Medico("Connan", "Rhodes", "Cirurgião Cardiotoráxico"));
+		medicoService.insereMedico(new Medico("Will", "Halstead", "Médico de Sala de Emergência"));
+		Medico medico = medicoService.achaMedicoPorCrm(2L);
+		
+		System.out.println(medico.getNome());
+		
+		List<Medico> medicos = medicoService.achaMedicoPorEspecialidade("Cirurgião Cardiotoráxico");
+		
+		for(Medico m : medicos) {
+			System.out.println(m.getNome());
+		}
 	}
 }

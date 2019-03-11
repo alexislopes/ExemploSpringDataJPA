@@ -32,15 +32,15 @@ public class MedicoRepositoryTest {
 	@Test
 	public void insereMedicoTest() {
 		Medico medico = new Medico();
-		medico.setNome("Will");
-		medico.setSobrenome("Halstead");
+		medico.setNome("Natalie");
+		medico.setSobrenome("MAnning");
 		medico.setEspecialidade("Medico de Sala de Emergência");
 		medicoRepository.save(medico);
 		assertNotNull(medico.getCrm());
 	}
 
 	@Test
-	public void achaMedicoPorId(){
+	public void achaMedicoPorCrm(){
 		Medico medico = medicoRepository.findMedicoByCrm(1L);
 		assertEquals("Connan", medico.getNome());
 	}

@@ -24,7 +24,7 @@ public class MedicoServiceImplTest {
     @Before
     public void setUp(){
         medicoService = new MedicoServiceImpl();
-        medico = new Medico("Will", "Halstead", "Sala de Emergencia");
+        medico = new Medico("Ethan", "Choi", "Médico de Sala de Emergencia");
     }
 
     @Test

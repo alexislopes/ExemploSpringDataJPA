@@ -10,7 +10,9 @@ public interface MedicoRepository extends CrudRepository<Medico, Long> {
 
 	@Query("select m from Medico m where m.especialidade = ?1")
 	public List<Medico> findMedicoByEspecialidade(String especialidade);
-
+	
 	public Medico findMedicoByCrm(Long crm);
+	
+	public void deleteAll();
 
 }

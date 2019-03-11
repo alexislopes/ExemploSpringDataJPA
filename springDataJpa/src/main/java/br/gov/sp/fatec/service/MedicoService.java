@@ -19,6 +19,8 @@ public interface MedicoService {
     Medico achaMedicoPorCrm(Long crm);
 
     List<Medico> achaMedicoPorEspecialidade(String especialidade);
+    
+    void deletaTodosMedicos();
 
 
 

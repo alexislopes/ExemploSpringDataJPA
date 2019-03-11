@@ -16,6 +16,7 @@ public class Consulta implements Serializable {
     private String dia;
     private String receita;
     private String diagnostico;
+    private String crm;
 
     public Consulta() {
     }
