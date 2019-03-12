@@ -14,18 +14,17 @@ public class Consulta implements Serializable {
     private  Long id;
     private String hora;
     private String dia;
-    private String receita;
     private String diagnostico;
-    private String crm;
+    private Long crm;
 
     public Consulta() {
     }
 
-    public Consulta(String hora, String data, String receita, String diagnostico) {
+    public Consulta(String hora, String dia, String diagnostico, Long crm) {
         this.hora = hora;
-        this.dia = data;
-        this.receita = receita;
+        this.dia = dia;
         this.diagnostico = diagnostico;
+        this.crm = crm;
     }
 
     public Long getId() {
@@ -52,19 +51,27 @@ public class Consulta implements Serializable {
         this.dia = data;
     }
 
-    public String getReceita() {
-        return receita;
-    }
-
-    public void setReceita(String receita) {
-        this.receita = receita;
-    }
-
     public String getDiagnostico() {
         return diagnostico;
     }
 
     public void setDiagnostico(String diagnostico) {
         this.diagnostico = diagnostico;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public Long getCrm() {
+        return crm;
+    }
+
+    public void setCrm(Long crm) {
+        this.crm = crm;
     }
 }

@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.service;
 
+import br.gov.sp.fatec.model.Consulta;
 import br.gov.sp.fatec.model.Medico;
 import br.gov.sp.fatec.repository.ConsultaRepository;
 import br.gov.sp.fatec.repository.MedicoRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,16 +41,15 @@ public class MedicoServiceImpl implements MedicoService {
     @Override
     @Transactional
     public void deletaMedico(Medico medico) {
+        consultaRepository.deleteAllByCrm(medico.getCrm());
         medicoRepository.delete(medico);
-        //List<Consulta> consultas = consultaRepository.queryConsulta(medico.getCrm());
-        //consultaRepository.deleteAll(consultas);
     }
 
     @Override
     @Transactional
-    public void deletaMedico(Long id) {
-        Medico medico = achaMedicoPorCrm(id);
-        medicoRepository.delete(medico);
+    public void deletaMedico(Long crm){
+        consultaRepository.deleteAllByCrm(crm);
+        medicoRepository.deleteById(crm);
     }
 
     @Override
@@ -60,13 +61,23 @@ public class MedicoServiceImpl implements MedicoService {
     @Override
     @Transactional
     public List<Medico> achaTodosMedicos() {
-        return (List<Medico>) medicoRepository.findAll();
+        List<Medico> auxmedicos = new ArrayList<>();
+        List<Medico> medicos = (List<Medico>) medicoRepository.findAll();
+        for(Medico m : medicos){
+            List<Consulta> consultas = consultaRepository.findConsultaByCrm(m.getCrm());
+            m.setConsultas(consultas);
+            auxmedicos.add(m);
+        }
+        return auxmedicos;
     }
 
     @Override
     @Transactional
     public Medico achaMedicoPorCrm(Long crm) {
-        return medicoRepository.findMedicoByCrm(crm);
+        List<Consulta> consultas = consultaRepository.findConsultaByCrm(crm);
+        Medico medico = medicoRepository.findMedicoByCrm(crm);
+        medico.setConsultas(consultas);
+        return medico;
     }
 
     @Override

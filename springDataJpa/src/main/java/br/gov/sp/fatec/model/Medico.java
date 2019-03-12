@@ -25,7 +25,7 @@ public class Medico implements Serializable {
     private String especialidade;
 
     
-    @OneToMany(mappedBy="crm", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="crm", targetEntity = Consulta.class, fetch = FetchType.LAZY)
     private List<Consulta> consultas;
 
 	public Medico() {
