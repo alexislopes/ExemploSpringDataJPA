@@ -35,13 +35,15 @@ public class ExemploSpringDataJpaApplication implements CommandLineRunner {
 		//medicoService.insereMedico(new Medico("Connor", "Rhodes", "Cirurgião Cardiotoráxico"));
 		//medicoService.insereMedico(new Medico("Will", "Halstead", "Médico de Sala de Emergência"));
 
-		//consultaService.insereConsulta(new Consulta("12:15", "17/02/2019", "gripe", 1L));
-		//consultaService.insereConsulta(new Consulta("13:45", "05/04/2019", "virose", 2L));
+		//consultaService.insereConsulta(new Consulta("12:15", "17/02/2019", "gripe", new Medico("Connor", "Rhodes", "Cirurgião Cardiotoráxico")));
+		//consultaService.insereConsulta(new Consulta("13:45", "05/04/2019", "virose", new Medico("Will", "Halstead", "Médico de Sala de Emergência")));
+
+
 
 
 		Medico medico = medicoService.achaMedicoPorCrm(2L);
 		
-		System.out.println(medico.getNome());
+		System.out.println(medico.toString());
 		System.out.println(medico.getConsultas().toString());
 		
 		List<Medico> medicos = medicoService.achaMedicoPorEspecialidade("Cirurgião Cardiotoráxico");

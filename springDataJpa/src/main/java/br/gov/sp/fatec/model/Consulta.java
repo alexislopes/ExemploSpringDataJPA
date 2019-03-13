@@ -1,9 +1,6 @@
 package br.gov.sp.fatec.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -15,16 +12,19 @@ public class Consulta implements Serializable {
     private String hora;
     private String dia;
     private String diagnostico;
-    private Long crm;
+
+    @ManyToOne
+    @JoinColumn(name="crm")
+    private Medico medico;
 
     public Consulta() {
     }
 
-    public Consulta(String hora, String dia, String diagnostico, Long crm) {
+    public Consulta(String hora, String dia, String diagnostico, Medico medico) {
         this.hora = hora;
         this.dia = dia;
         this.diagnostico = diagnostico;
-        this.crm = crm;
+        this.medico = medico;
     }
 
     public Long getId() {
@@ -67,11 +67,11 @@ public class Consulta implements Serializable {
         this.dia = dia;
     }
 
-    public Long getCrm() {
-        return crm;
+    public Medico getCrm() {
+        return this.medico;
     }
 
-    public void setCrm(Long crm) {
-        this.crm = crm;
+    public void setCrm(Medico medico) {
+        this.medico = medico;
     }
 }

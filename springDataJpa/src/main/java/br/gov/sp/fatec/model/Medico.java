@@ -25,10 +25,11 @@ public class Medico implements Serializable {
     private String especialidade;
 
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="crm", targetEntity = Consulta.class, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="medico", targetEntity = Consulta.class, fetch = FetchType.LAZY)
     private List<Consulta> consultas;
 
 	public Medico() {
+
 	}
 
 	public Medico(String nome, String sobrenome, String especialidade) {
@@ -36,6 +37,30 @@ public class Medico implements Serializable {
 		this.sobrenome = sobrenome;
 		this.especialidade = especialidade;
 		this.consultas = consultas;
+	}
+
+	public Medico(Long crm, String nome, String sobrenome, String especialidade) {
+		this.crm = crm;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.especialidade = especialidade;
+		this.consultas = consultas;
+	}
+
+
+
+
+
+
+		@Override
+	public String toString() {
+		return "Medico{" +
+				"crm=" + crm +
+				", nome='" + nome + '\'' +
+				", sobrenome='" + sobrenome + '\'' +
+				", especialidade='" + especialidade + '\'' +
+				", consultas=" + consultas +
+				'}';
 	}
 
 	public Long getCrm() {

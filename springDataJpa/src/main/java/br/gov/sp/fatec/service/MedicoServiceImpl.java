@@ -41,14 +41,15 @@ public class MedicoServiceImpl implements MedicoService {
     @Override
     @Transactional
     public void deletaMedico(Medico medico) {
-        consultaRepository.deleteAllByCrm(medico.getCrm());
+        consultaRepository.deleteAllByMedico(medico);
         medicoRepository.delete(medico);
     }
 
     @Override
     @Transactional
     public void deletaMedico(Long crm){
-        consultaRepository.deleteAllByCrm(crm);
+        Medico medico = medicoRepository.findMedicoByCrm(crm);
+        consultaRepository.deleteAllByMedico(medico);
         medicoRepository.deleteById(crm);
     }
 
@@ -64,7 +65,7 @@ public class MedicoServiceImpl implements MedicoService {
         List<Medico> auxmedicos = new ArrayList<>();
         List<Medico> medicos = (List<Medico>) medicoRepository.findAll();
         for(Medico m : medicos){
-            List<Consulta> consultas = consultaRepository.findConsultaByCrm(m.getCrm());
+            List<Consulta> consultas = consultaRepository.findConsultaByMedico(m.getCrm());
             m.setConsultas(consultas);
             auxmedicos.add(m);
         }
@@ -74,8 +75,8 @@ public class MedicoServiceImpl implements MedicoService {
     @Override
     @Transactional
     public Medico achaMedicoPorCrm(Long crm) {
-        List<Consulta> consultas = consultaRepository.findConsultaByCrm(crm);
         Medico medico = medicoRepository.findMedicoByCrm(crm);
+        List<Consulta> consultas = consultaRepository.findConsultaByMedico(medico.getCrm());
         medico.setConsultas(consultas);
         return medico;
     }

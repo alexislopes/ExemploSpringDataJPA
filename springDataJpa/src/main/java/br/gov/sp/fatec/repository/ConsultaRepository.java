@@ -1,6 +1,7 @@
 package br.gov.sp.fatec.repository;
 
 import br.gov.sp.fatec.model.Consulta;
+import br.gov.sp.fatec.model.Medico;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -13,11 +14,11 @@ public interface ConsultaRepository extends CrudRepository<Consulta, Long> {
 	@Query("SELECT c FROM Consulta c WHERE c.diagnostico = ?1")
 	List<Consulta> findConsultaByDiagnostico(String diagnostico);
 
-	@Query("SELECT c FROM Consulta c WHERE c.crm = ?1")
-	List<Consulta> findConsultaByCrm(Long crm);
+	@Query("SELECT c FROM Consulta c JOIN c.medico m WHERE m.crm = ?1")
+	List<Consulta> findConsultaByMedico(Long crm);
 
 	List<Consulta> findConsultaByDia(String dia);
 
-	void deleteAllByCrm(Long crm);
+	void deleteAllByMedico(Medico medico);
 
 }
